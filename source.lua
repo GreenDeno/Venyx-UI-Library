@@ -580,9 +580,12 @@ do
 			})
 		})
 		--If callback 
-		if not callback then
+		if not callback and timer ~= nil then
 			notification.Decline.Visible = false
 			notification.Accept.Visible = false
+			else if not callback then
+				notification.Decline.Visible = false
+				end
 		end
 		
 		-- dragging
