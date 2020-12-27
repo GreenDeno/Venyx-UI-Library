@@ -499,7 +499,7 @@ do
 	
 	-- new modules
 	
-	function library:Notify(title, text, callback)
+	function library:Notify(title, text, timer, callback)
 	
 		-- overwrite last notification
 		if self.activeNotification then
@@ -657,6 +657,16 @@ do
 			
 			close()
 		end)
+		
+		if not callback then
+			notification.Decline.Visible = false
+			notification.Accept.Visible = false
+			end
+		
+		if timer > 0 then
+			wait(timer)
+			close()
+		end
 	end
 	
 	function section:addButton(title, callback)
