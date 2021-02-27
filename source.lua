@@ -499,7 +499,7 @@ do
 	
 	-- new modules
 	
-	function library:Notify(title, text, callback)
+	function library:Notify(title, text, callback, timer)
 	
 		-- overwrite last notification
 		if self.activeNotification then
@@ -579,6 +579,14 @@ do
 				ZIndex = 4
 			})
 		})
+		--If callback 
+		if not callback and timer ~= nil then
+			notification.Decline.Visible = false
+			notification.Accept.Visible = false
+			else if not callback then
+				notification.Decline.Visible = false
+				end
+		end
 		
 		-- dragging
 		utility:DraggingEnabled(notification)
@@ -657,6 +665,15 @@ do
 			
 			close()
 		end)
+		
+		spawn(function() 
+			if timer ~= nil then
+				wait(timer)
+				close()
+			end
+		end)
+		
+		
 	end
 	
 	function section:addButton(title, callback)
